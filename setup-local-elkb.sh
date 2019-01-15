@@ -5,6 +5,7 @@
 ELKB_VERSION=${ELKB_VERSION:-6.4.0}
 ###Script Settings
 
+
 ###Readme
 #Write the readme to the local file
 readMe="$(cat <<EOF
@@ -34,9 +35,11 @@ echo "$readMe" > ~/elkb_readme
 echo "Readme created locally"
 ###Readme
 
+
 #Grabs the local external ip
 IP=$(ip route get 8.8.8.8 | head -1 | cut -d' ' -f8)
 #Grabs the local external ip
+
 
 ###Elasticsearch
 echo "Create docker data volume for es data"
@@ -45,10 +48,12 @@ echo "Run Elasticsearch"
 docker run --name=elasticsearch -d --restart unless-stopped --log-opt max-size=100m -p 9200:9200 -p 9300:9300 -e LOG_LEVEL=warn -e "discovery.type=single-node" -v esdata:/usr/share/elasticsearch/data docker.elastic.co/elasticsearch/elasticsearch:${ELKB_VERSION}
 ###Elasticsearch
 
+
 ###Kibana
 echo "Run Kibana"
 docker run --name=kibana -d --restart unless-stopped --log-opt max-size=100m -p 5601:5601 -e LOG_LEVEL=warn -e ELASTICSEARCH_URL=http://$IP:9200 docker.elastic.co/kibana/kibana:${ELKB_VERSION}
 ###Kibana
+
 
 ###Logstash
 echo "Make logstash.conf"
@@ -118,6 +123,7 @@ sudo chmod go-w /home/$USER/filebeat.yml
 docker run -d -u root --restart unless-stopped --log-opt max-size=100m --name filebeat --volume="/var/lib/docker/containers:/var/lib/docker/containers:ro" --volume="/var/run/docker.sock:/var/run/docker.sock:ro" -v /home/$USER/filebeat.yml:/usr/share/filebeat/filebeat.yml docker.elastic.co/beats/filebeat:${ELKB_VERSION}
 ###Filebeat###
 
+##EVERYTHING BELOW THIS POINT HAS BEEN DEPRECATED ALTHOUGH STILL USEFUL!!## 
 
 #Sleep and let everything above come up
 # echo "***********************************************"
