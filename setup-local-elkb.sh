@@ -1,8 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 
 ###Script Settings
 #Define the version to be used for all elastic products
-ELKB_VERSION=${ELKB_VERSION:-6.4.0}
+ELKB_VERSION=${ELKB_VERSION:-6.5.4}
 ###Script Settings
 
 
