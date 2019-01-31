@@ -12,15 +12,14 @@ IP=$(ip route get 8.8.8.8 | head -1 | cut -d' ' -f8)
 
 
 ###Stop everything
-docker stop elasticsearch
-docker stop kibana
-docker stop logstash
-docker stop filebeat
+echo "Stop Contatiners"
+docker stop elasticsearch kibana logstash filebeat
 ###Stop everything
 
 
 ###Remove Images
-docker rmi elasticsearch logstash logstash filebeat
+echo "Removing Contatiners"
+docker rm elasticsearch logstash logstash filebeat
 ###Remove Images
 
 
